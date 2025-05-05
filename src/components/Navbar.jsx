@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import logo from '/logo (1).png'
 import { BiPhoneCall } from 'react-icons/bi'
 
-
 export const Navbar = () => {
     const [isSticky, setSticky]=useState(false);
     //handle scroll functions
@@ -19,43 +18,43 @@ export const Navbar = () => {
         window.addEventListener("scroll", handleScroll);
 
         return()=>{
-            window.addEventListener("scroll",handleScroll);
+            window.removeEventListener("scroll", handleScroll); // Fixed the event removal
         }
         
     },[])
     const navItems =(
         <>
-        <li>
-            <a href='/'>Home</a>
+        <li className="hover:bg-gray-100 rounded-lg">
+            <a href='/' className="hover:text-green-500">Home</a>
         </li>
-        <li tabIndex={0}>
+        <li tabIndex={0} className="hover:bg-gray-100 rounded-lg">
             <details>
-            <summary>Menu</summary>
-            <ul className="p-2">
-                <li><a>All</a></li>
-                <li><a>Salad</a></li>
-                <li><a>Pizza</a></li>
+            <summary className="hover:text-green-500">Menu</summary>
+            <ul className="p-2 bg-white shadow-md">
+                <li className="hover:bg-gray-100"><a className="hover:text-green-500">All</a></li>
+                <li className="hover:bg-gray-100"><a className="hover:text-green-500">Salad</a></li>
+                <li className="hover:bg-gray-100"><a className="hover:text-green-500">Pizza</a></li>
             </ul>
             </details>
         </li>
-        <li tabIndex={0}>
+        <li tabIndex={0} className="hover:bg-gray-100 rounded-lg">
             <details>
-            <summary>Services</summary>
-            <ul className="p-2">
-                <li><a>Online Order</a></li>
-                <li><a>Table Booking</a></li>
-                <li><a>Order Tracking</a></li>
+            <summary className="hover:text-green-500">Services</summary>
+            <ul className="p-2 bg-white shadow-md">
+                <li className="hover:bg-gray-100"><a className="hover:text-green-500">Online Order</a></li>
+                <li className="hover:bg-gray-100"><a className="hover:text-green-500">Table Booking</a></li>
+                <li className="hover:bg-gray-100"><a className="hover:text-green-500">Order Tracking</a></li>
             </ul>
             </details>
         </li>
-        <li>
-            <a>Offers</a>
+        <li className="hover:bg-gray-100 rounded-lg">
+            <a className="hover:text-green-500">Offers</a>
         </li>
         </>
     )
   return (
     <header className='max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out'>
-        <div className={`navbar xl:px-24 ${isSticky ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out": ""}`}>
+        <div className={`navbar xl:px-24 ${isSticky ? "shadow-md bg-white transition-all duration-300 ease-in-out": ""}`}>
         <div className="navbar-start">
             <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -63,12 +62,12 @@ export const Navbar = () => {
             </div>
             <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                className="menu menu-sm dropdown-content bg-white rounded-box z-[100] mt-3 w-52 p-2 shadow">
                 {navItems}
             </ul>
             </div>
             <a href='/'>
-                <img src={logo}alt=""/>
+                <img src={logo} alt=""/>
             </a>
         </div>
         <div className="navbar-center hidden lg:flex">
