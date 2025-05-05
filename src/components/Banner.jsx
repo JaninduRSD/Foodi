@@ -15,11 +15,11 @@ export const Banner = () => {
               <div className='space-y-1'>
                 <h5 className='font-medium mb-1'>Spicy noodles</h5>
                 <div className="rating rating-sm">
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="1 star" />
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="2 star" defaultChecked />
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="3 star" />
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="4 star" />
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="5 star" />
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="1 star" readOnly/>
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="2 star" defaultChecked readOnly/>
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="3 star" readOnly/>
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="4 star" readOnly/>
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="5 star" readOnly/>
                 </div>
                 <p className='text-red-500'>$ 18.00</p>
               </div>
@@ -29,11 +29,11 @@ export const Banner = () => {
               <div className='space-y-1'>
                 <h5 className='font-medium mb-1'>Spicy noodles</h5>
                 <div className="rating rating-sm">
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="1 star" />
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="2 star" defaultChecked />
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="3 star" />
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="4 star" />
-                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="5 star" />
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="1 star" readOnly />
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="2 star" defaultChecked readOnly/>
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="3 star" readOnly/>
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="4 star" readOnly/>
+                  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="5 star" readOnly/>
                 </div>
                 <p className='text-red-500'>$ 18.00</p>
               </div>
