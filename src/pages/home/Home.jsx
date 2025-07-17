@@ -1,7 +1,8 @@
 import React from 'react'
 import Banner from '../../components/Banner';
 import { Categories } from './Categories';
-import { SpecialDishes } from './SpecialDishes';
+import  SpecialDishes  from './SpecialDishes';
+import Testamonials from './Testamonial';
 
 export const Home = () => {
   return (
@@ -9,6 +10,7 @@ export const Home = () => {
       <Banner/>
       <Categories/>
       <SpecialDishes/>
+      <Testamonials/>
     </div>
   )
 }
