@@ -90,7 +90,11 @@ const Footer = () => {
                     </a>
                     </div>
                 </nav>
+<<<<<<< HEAD
         </footer>
+=======
+                </footer>
+>>>>>>> 311fed178f43b7502cd10c212b5eff20198358f9
    </div>
   )
 }
