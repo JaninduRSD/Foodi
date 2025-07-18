@@ -2,13 +2,15 @@ import React, {useState} from 'react'
 import Cards from '../../components/Card';
 
 const Menu = () => {
-  const [Menu, setMenu]= useState([]);
+  const [menu, setMenu]= useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [selectesCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const[sortOption, setSortOption] = useState('default');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8);
 
   //load menu data
-  useState(() => {
+  React.useEffect(() => {
     // Fetch menu data from an API or local JSON file
     const fetchMenuData = async () => {
       try{
@@ -28,14 +30,16 @@ const Menu = () => {
 
   // Filter items based on selected category
   const filterItems = (category) => {
-    const filtered = category === 'All' ? Menu : Menu.filter(item => item.category === category);
+    const filtered = category === 'All' ? menu : menu.filter(item => item.category === category);
     setFilteredItems(filtered);
     setSelectedCategory(category);
+    setCurrentPage(1); 
   }
   //show all data
   const showAll= () => {
-    setFilteredItems(Menu);
+    setFilteredItems(menu);
     setSelectedCategory('All');
+    setCurrentPage(1);
   }
   //sorting based on A-Z, Z-A, and low to high price
   const handleSortChange = (option) => {
@@ -56,11 +60,19 @@ const Menu = () => {
         break;
   }
     setFilteredItems(sortedItems);
+    setCurrentPage(1);
+}
+
+const indexofLastItem = currentPage * itemsPerPage;
+const indexofFirstItem = indexofLastItem - itemsPerPage;
+const currentItems = filteredItems.slice(indexofFirstItem, indexofLastItem);
+const pageinate = (pageNumber) => {
+  setCurrentPage(pageNumber);
 }
   return (
     <div>
         <div>
-            <div className='section-container bg-gradient-to-r from-[#FAFAFA] from-0% tO-[#FCFCFC] to-100%'>
+            <div className='section-container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%'>
                   <div className='py-48 flex flex-col  justify-center items-center gap-8'>
                     {/* text */}
                     <div className='text-center space-y-7 px-4'>
@@ -76,35 +88,46 @@ const Menu = () => {
         </div>
         <div className='section-container'>
           {/* filtering and sorting */}
-           <div>
-             <div className='flex justify-between items-center mb-6'>
-                <div className='flex gap-4'>
-                  <button onClick={() => showAll()} className={`btn ${selectesCategory === 'All' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>All</button>
-                  <button onClick={() => filterItems('salad')} className={`btn ${selectesCategory === 'salad' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Salad</button>
-                  <button onClick={() => filterItems('pizza')} className={`btn ${selectesCategory === 'pizza' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Pizza</button>
-                  <button onClick={() => filterItems('soup')} className={`btn ${selectesCategory === 'soup' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Soups</button>
-                  <button onClick={() => filterItems('dessert')} className={`btn ${selectesCategory === 'dessert' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Desserts</button>
-                  <button onClick={() => filterItems('drinks')} className={`btn ${selectesCategory === 'drinks' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Drinks</button>
-
-                </div>
-                <div>
-                  <select value={sortOption} onChange={(e) => handleSortChange(e.target.value)} className='select select-bordered border-black w-full max-w-xs bg-white text-black'>
-                    <option value="default">Sort By</option>
-                    <option value="A-Z">A-Z</option>
-                    <option value="Z-A">Z-A</option>
-                    <option value="low-to-high">Price: Low to High</option>
-                  </select>
-                </div>
-              </div>
-           </div>
+          <div className='flex flex-col md:flex-row md:justify-between items-center mb-6 gap-4'>
+            <div className='flex flex-wrap gap-4'>
+              <button onClick={() => showAll()} className={`btn ${selectedCategory === 'All' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>All</button>
+              <button onClick={() => filterItems('salad')} className={`btn ${selectedCategory === 'salad' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Salad</button>
+              <button onClick={() => filterItems('pizza')} className={`btn ${selectedCategory === 'pizza' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Pizza</button>
+              <button onClick={() => filterItems('soup')} className={`btn ${selectedCategory === 'soup' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Soup</button>
+              <button onClick={() => filterItems('dessert')} className={`btn ${selectedCategory === 'dessert' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Desserts</button>
+              <button onClick={() => filterItems('drinks')} className={`btn ${selectedCategory === 'drinks' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded`}>Drinks</button>
+            </div>
+            <div>
+              <select name="sort" id="sort" onChange={(e) => handleSortChange(e.target.value)} value={sortOption} className='select select-bordered border-black w-full max-w-xs bg-white text-black'>
+                <option value="default">Default</option>
+                <option value="A-Z">A-Z</option>
+                <option value="Z-A">Z-A</option>
+                <option value="low-to-high">Price: Low to High</option>
+              </select>
+            </div>
+          </div>
            {/* products card */}
            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {
-              filteredItems.map((item) => (
+              currentItems.map((item) => (
                 <Cards key={item.id} item={item}/>
               ))
             }
            </div>
+        </div>
+
+        <div className='flex justify-center mt-8'>
+          {
+            Array.from({ length: Math.ceil(filteredItems.length / itemsPerPage) }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => pageinate(index + 1)}
+                className={`btn ${currentPage === index + 1 ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'} px-4 py-2 rounded-full m-2 text-sm`}
+              >
+                {index + 1}
+              </button>
+            ))
+          }
         </div>
     </div>
   )
