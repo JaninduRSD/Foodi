@@ -31,7 +31,7 @@ export const Navbar = () => {
             <details>
             <summary className="hover:text-green-500">Menu</summary>
             <ul className="p-2 bg-white shadow-md">
-                <li className="hover:bg-gray-100"><a className="hover:text-green-500">All</a></li>
+                <li className="hover:bg-gray-100"><a className="hover:text-green-500" href='/menu'>All</a></li>
                 <li className="hover:bg-gray-100"><a className="hover:text-green-500">Salad</a></li>
                 <li className="hover:bg-gray-100"><a className="hover:text-green-500">Pizza</a></li>
             </ul>
