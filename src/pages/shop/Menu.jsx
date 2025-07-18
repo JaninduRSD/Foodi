@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Cards from '../../components/Cards/Cards';
+import Cards from '../../components/Card';
 
 const Menu = () => {
   const [Menu, setMenu]= useState([]);

@@ -8,13 +8,9 @@ export const Main = () => {
   return (
     <div>
         <Navbar/>
-<<<<<<< HEAD
-        <div className='min-h-screen'>
-          <Outlet/>
-        </div>
-=======
-        <Outlet/>
->>>>>>> 311fed178f43b7502cd10c212b5eff20198358f9
+            <div className='min-h-screen'>
+                <Outlet/>
+            </div>
         <Footer/>
     </div>
   )
