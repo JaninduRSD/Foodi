@@ -87,7 +87,7 @@ export const Navbar = () => {
                 </div>
             </label>
 
-            <a className="btn bg-green-500 rounded-full px-6 text-white flex items-center gap-2"><BiPhoneCall/> Contact</a>
+            <button className="btn bg-green-500 rounded-full px-6 text-white flex items-center gap-2"><BiPhoneCall/> Contact</button>
         </div>
         </div>
     </header>
