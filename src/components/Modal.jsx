@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Modal = () => {
   return (
@@ -19,6 +20,7 @@ const Modal = () => {
             <a className="text-green-600 hover:underline text-sm" href="#">Forgot password?</a>
           </div>
           <button className="btn bg-green-600 hover:bg-green-700 text-white w-full mt-2 rounded-full font-semibold transition">Login</button>
+          <p className='text-center'>Don't have an account?<Link to="/signup" className='text-green-600 hover:underline'>Signup Now</Link></p>
         </form>
         <div className="modal-action mt-6 flex justify-end">
           <form method="dialog">
