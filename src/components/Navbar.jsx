@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logo from '/logo (1).png'
-import { BiPhoneCall } from 'react-icons/bi'
+import { FaUserPlus } from 'react-icons/fa'; // commonly used for registration
+
 
 export const Navbar = () => {
     const [isSticky, setSticky]=useState(false);
@@ -87,7 +88,19 @@ export const Navbar = () => {
                 </div>
             </label>
 
-            <button className="btn bg-green-500 rounded-full px-6 text-white flex items-center gap-2"><BiPhoneCall/> Contact</button>
+            <button className="btn bg-green-500 rounded-full px-6 text-white flex items-center gap-2" onClick={()=>document.getElementById('my_modal_5').showModal()}><FaUserPlus/> Login</button>
+            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box bg-white">
+                    <h3 className="font-bold text-lg">Hello!</h3>
+                    <p className="py-4">Press ESC key or click the button below to close</p>
+                    <div className="modal-action">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn">Close</button>
+                    </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
         </div>
     </header>
