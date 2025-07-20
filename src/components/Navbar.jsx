@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react'
 import logo from '/logo (1).png'
 import { FaUserPlus } from 'react-icons/fa'; // commonly used for registration
 import Modal from './Modal'; // Assuming Modal is in the same directory
-
+import { AuthContext } from '../contexts/AuthProvider'; 
+import { useContext } from 'react';
 
 export const Navbar = () => {
     const [isSticky, setSticky]=useState(false);
     //handle scroll functions
+
+    const {user}=useContext(AuthContext);
+    console.log(user);
     useEffect(() => {
         const handleScroll=()=>{
             const offset= window.scrollY;
