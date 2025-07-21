@@ -2,10 +2,31 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa'; // commonly used for Google login
+import { AuthContext } from '../contexts/AuthProvider';
+import { useContext } from 'react';
+
 
 const Modal = () => {
     const { register, handleSubmit,  formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+
+  const{signUpWithGmail,login}= useContext(AuthContext);
+  const onSubmit = data => {
+    const email = data.email;
+    const password = data.password;
+    login(email, password).then((result) => {
+      const user =result.user;
+      alert("Login successful!");
+    }).catch((error) => console.log(error));
+  }
+  
+  const handleLogin = () => {
+    signUpWithGmail().then((result) => {
+      const user = result.user;
+      alert("Login successful!");
+    }).catch((error) => console.log(error));
+      
+  }
+
   return (
     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
       <div className="modal-box bg-white rounded-xl  py-4 px-8">
@@ -27,7 +48,7 @@ const Modal = () => {
           <p className='text-center'>Don't have an account?<Link to="/signup" className='text-green-600 hover:underline'>Signup Now</Link></p>
         </form>
         <div className='text-center mt-6 space-x-3'>
-            <button className="btn btn-circle hover:bg-green-600 hover:text-white bg-gray-300 text-black border-0 ">
+            <button className="btn btn-circle hover:bg-green-600 hover:text-white bg-gray-300 text-black border-0 " onClick={handleLogin}>
                 <FaGoogle />
             </button>
             <button className="btn btn-circle hover:bg-green-600 hover:text-white bg-gray-300 text-black border-0 ">
