@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router";
 import {Main} from "../layout/Main"
 import Home from "../pages/home/Home"
 import Menu  from "../pages/shop/Menu";
-import { SignUp } from "../components/SignUp";
+import  SignUp  from "../components/SignUp";
 
 const router= createBrowserRouter([
     {

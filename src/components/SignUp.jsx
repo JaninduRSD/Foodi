@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form"
 import Modal from "./Modal";
 import { AuthContext } from "../contexts/AuthProvider";
 
-const Signup = () => {
+const SignUp = () => {
     const {
         register,
         handleSubmit,
@@ -117,4 +117,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default SignUp
