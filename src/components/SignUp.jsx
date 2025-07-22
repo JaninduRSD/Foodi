@@ -13,6 +13,8 @@ const SignUp = () => {
         formState: { errors },
       } = useForm();
 
+      
+
       const {createUser, login} = useContext(AuthContext);
           // redirecting to home page or specifig page
     const location = useLocation();

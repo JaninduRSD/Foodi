@@ -1,22 +1,32 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa'; // commonly used for Google login
 import { AuthContext } from '../contexts/AuthProvider';
-import { useContext } from 'react';
+import { useContext , useState } from 'react';
 
 
 const Modal = () => {
     const { register, handleSubmit,  formState: { errors } } = useForm();
 
   const{signUpWithGmail,login}= useContext(AuthContext);
+  const {errorMessage, setErrorMessage} = useState("");
+  const location =useLocation();
+  const navigate = useNavigate();
+   const from = location.state?.from?.pathname || "/";
+  
   const onSubmit = data => {
     const email = data.email;
     const password = data.password;
     login(email, password).then((result) => {
       const user =result.user;
       alert("Login successful!");
-    }).catch((error) => console.log(error));
+      document.getElementById("my_modal_5").close();
+      navigate(from, {replace: true});
+    }).catch((error) => {
+      setErrorMessage("provide a correct email and password");
+      console.log(error);
+    });
   }
   
   const handleLogin = () => {
@@ -44,6 +54,11 @@ const Modal = () => {
           <div className="flex justify-between items-center">
             <a className="text-green-600 hover:underline text-sm" href="#">Forgot password?</a>
           </div>
+
+          {
+            errorMessage ? <p className='text-red-500 text-xs'>{errorMessage}</p>:""
+          }
+
           <button className="btn bg-green-600 hover:bg-green-700 text-white w-full mt-2 rounded-full font-semibold transition">Login</button>
           <p className='text-center'>Don't have an account?<Link to="/signup" className='text-green-600 hover:underline'>Signup Now</Link></p>
         </form>

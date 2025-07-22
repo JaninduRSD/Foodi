@@ -93,7 +93,12 @@ export const Navbar = () => {
                 </div>
             </label>
 
-            <button className="btn bg-green-500 rounded-full px-6 text-white flex items-center gap-2" onClick={()=>document.getElementById('my_modal_5').showModal()}><FaUserPlus/> Login</button>
+            {
+                user?<><p>Logout</p></> : <button className="btn bg-green-500 rounded-full px-6 text-white flex items-center gap-2" onClick={()=>document.getElementById('my_modal_5').showModal()}><FaUserPlus/> Login</button>
+
+                
+            }
+
             <Modal />
         </div>
         </div>
