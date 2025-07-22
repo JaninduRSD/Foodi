@@ -4,6 +4,7 @@ import { FaUserPlus } from 'react-icons/fa'; // commonly used for registration
 import Modal from './Modal'; // Assuming Modal is in the same directory
 import { AuthContext } from '../contexts/AuthProvider'; 
 import { useContext } from 'react';
+import Profile from './Profile';
 
 export const Navbar = () => {
     const [isSticky, setSticky]=useState(false);
@@ -94,9 +95,8 @@ export const Navbar = () => {
             </label>
 
             {
-                user?<><p>Logout</p></> : <button className="btn bg-green-500 rounded-full px-6 text-white flex items-center gap-2" onClick={()=>document.getElementById('my_modal_5').showModal()}><FaUserPlus/> Login</button>
+                user?<Profile user={user}/> : <button className="btn bg-green-500 rounded-full px-6 text-white flex items-center gap-2" onClick={()=>document.getElementById('my_modal_5').showModal()}><FaUserPlus/> Login</button>
 
-                
             }
 
             <Modal />
