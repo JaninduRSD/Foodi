@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from "../contexts/AuthProvider";
 
-const Profile = ({user}) => {
+const Profile = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    logOut().then(() => {
+      alert("Logout")
+    }).catch(error => {});
+  }
   return (
     <div><div className="drawer drawer-end z-50">
   <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -22,10 +29,10 @@ const Profile = ({user}) => {
     <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
     <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
       {/* Sidebar content here */}
-      <li><a>Profile</a></li>
+      <li><a href='/update-profile'>Profile</a></li>
       <li><a>Order</a></li>
       <li><a>Setting</a></li>
-      <li><a>Logout</a></li>
+      <li><a onClick={handleLogout}>Logout</a></li>
 
     </ul>
   </div>
