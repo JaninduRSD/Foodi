@@ -2,12 +2,22 @@ import React from 'react'
 import { useContext } from 'react';
 import { Authcontext } from '../../context/AuthProvider/AuthProvider';
 import { useLocation } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner';
 
-const PrivateRouter = () => {
+const PrivateRouter = ({ children }) => {
     const { user, loading } = useContext(Authcontext)
     const location = useLocation();
+
+    if (loading) {
+        return(
+            <LoadingSpinner />
+        )
+    }
+    if(user){
+        return children;
+    }
   return (
-    <div>PrivateRouter</div>
+    <Navigate to="/signup" state={{ from: location }} replace ></Navigate>
   )
 }
 export default PrivateRouter;
