@@ -18,15 +18,15 @@ const router= createBrowserRouter([
             },
             {
                 path: "/menu",
-                element:<PrivateRouter><Menu/></PrivateRouter>
+                element:<Menu/>
             },
             {
                 path: "/cart-page",
-                element: <CartPage />
+                element:<PrivateRouter><CartPage /></PrivateRouter>
             },
             {
                 path: "/update-profile",
-                element: <UpdateProfile />
+                element: <PrivateRouter><UpdateProfile /></PrivateRouter>
             }
         ]
     },
