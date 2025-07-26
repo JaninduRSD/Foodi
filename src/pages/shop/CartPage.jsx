@@ -18,13 +18,22 @@ const CartPage = () => {
             confirmButtonText: "Yes, delete it!"
             }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-                });
+                fetch(`http://localhost:6001/carts/${item._id}`,{
+                    method: 'DELETE'
+
+                }).then(res => res.json()).then(data => {
+                    if (data.deletedCount > 0) {
+                        refetch();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your item has been deleted.",
+                            icon: "success",
+                        })
+                    }
+                })
             }
             });
+            
     }
   return (
     <div className='section-container '>
@@ -78,7 +87,7 @@ const CartPage = () => {
                     <td>{item.quantity}</td>
                     <td>{item.price}</td>
                     <th>
-                    <button className="btn btn-ghost text-red-500 btn-xs" onClick={()=>handleDelete}>
+                    <button className="btn btn-ghost text-red-500 btn-xs" onClick={() => handleDelete(item)}>
                         <FaTrash/>
                     </button>
                     </th>
@@ -87,6 +96,17 @@ const CartPage = () => {
                 }
                 </tbody>
             </table>
+            </div>
+
+
+            {/* customer details */}
+            <div>
+                <div className='md:w-1/2 space-y-3'>
+                    <h3 className='font-medium'>Customer Details</h3>
+                </div>
+                <div className='md:w-1/2 space-y-3'>
+
+                </div>
             </div>
         </div>
     </div>
