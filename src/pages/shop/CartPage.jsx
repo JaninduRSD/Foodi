@@ -2,9 +2,12 @@ import React from 'react'
 import useCart from '../../hooks/useCart';
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../contexts/AuthProvider';
+import { useContext } from 'react';
 
 const CartPage = () => {
     const [cart, refetch] = useCart();
+    const {user} = useContext(AuthContext);
 
     //handle delete
     const handleDelete = (item)=>{
@@ -100,12 +103,18 @@ const CartPage = () => {
 
 
             {/* customer details */}
-            <div>
+            <div className='my-12 flex flex-col md:flex-row justify-between items-start'>
                 <div className='md:w-1/2 space-y-3'>
                     <h3 className='font-medium'>Customer Details</h3>
+                    <p>Name: {user.displayName}</p>
+                    <p>Email: {user.email}</p>
+                    <p>User_id: {user.uid}</p>
                 </div>
                 <div className='md:w-1/2 space-y-3'>
-
+                    <h3 className='font-medium'>Shopping Details</h3>
+                    <p>Total Items: {cart.length}</p>
+                    <p>Total Price: $0.00</p>
+                    <button className='btn btn-primary bg-green-500'>Checkout</button>
                 </div>
             </div>
         </div>
