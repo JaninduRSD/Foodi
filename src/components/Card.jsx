@@ -1,9 +1,56 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router'
+import React, { use, useState, useContext } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router'
 import {FaHeart} from "react-icons/fa"
+import { AuthContext } from '../contexts/AuthProvider';
+import Swal from 'sweetalert2'
 
 export const Card = ({item}) => {
+    const {name,image,price,recipe, _id} = item;
     const[isHeartFillted, setIsHeartFillted]=useState(false);
+    const {user}= useContext(AuthContext);
+
+    const navigate= useNavigate();
+    const location= useLocation();
+
+    //add to cart
+    const handleAddtoCart = (item) =>{
+        // console.log("btn clicked")
+        if (user && user?.email){
+            const cartItem= {menuItemId:_id,name, quentity:1,image,price,email:user.email}
+            // console.log(cartItem);
+            fetch('http://localhost:6001/carts',{
+                method:'POST',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(cartItem)
+            }).then(res=>res.json()).then(data=>{
+                if(data.insertedId){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Item added to cart',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            });
+        }else{
+            Swal.fire({
+            title: "Are you sure?",
+            text: "Please create an account or login",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                navigate('/signup', {state:{from: location  }})
+            }
+        });
+        }
+    }
     const handleHeartClick = () => {
         setIsHeartFillted(!isHeartFillted)
     }
@@ -26,7 +73,7 @@ export const Card = ({item}) => {
         <p>Description of the item</p>
         <div className="card-actions justify-between items-center mt-2">
             <h5 className='font-semibold'><span className='text-sm text-red-500'>$</span>{item.price}</h5>
-            <button className="btn bg-green-500 text-white ">Buy Now</button>
+            <button className="btn bg-green-500 text-white " onClick={() => handleAddtoCart(item)}>Buy Now</button>
         </div>
     </div>
     </div>
