@@ -70,6 +70,24 @@ async function run() {
         res.send(result);
     })
 
+    //update cart quentity
+    app.put('/carts/:id',async(req, res)=>{
+        const id = req.params.id;
+        const {quentity} =req.body;
+        const filter ={_id: new ObjectId(id)};
+        const options = { upsert: true }; 
+        
+        const updateDoc={
+          $set:{
+            quentity: parseInt(quentity,10)
+
+          },
+        };
+
+        const result = await cartCollections.updateOne(filter, updateDoc, options);
+        res.send(result);
+    });
+
 
 
 
