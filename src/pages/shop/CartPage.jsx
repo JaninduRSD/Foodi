@@ -3,11 +3,73 @@ import useCart from '../../hooks/useCart';
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthProvider';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import '../../App.css';
 
 const CartPage = () => {
     const [cart, refetch] = useCart();
     const {user} = useContext(AuthContext);
+    const [cartItems, setCartItems] = useState([]);
+
+    // calculate total price
+    const calculatePrice = (item) => {
+        return item.price * item.quentity;
+    }
+
+    //sub total
+    const subTotal = cart.reduce((total, item) => total + calculatePrice(item), 0);
+
+    //quntity up
+    const handleQuantityUP = (item) => {
+        fetch(`http://localhost:6001/carts/${item._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({quentity: item.quentity + 1})
+        }).then((res) => res.json()).then((data) => {
+            const updatedCart = cartItems.map((cartItem) => {
+                if(cartItem._id === item._id){
+                    return{
+                        ...cartItem,
+                        quentity: cartItem.quentity + 1
+                    }
+                }
+                return cartItem;
+
+            })
+            refetch();
+            setCartItems(updatedCart);
+        })
+    }
+
+    //handle quantity change
+    const handleQuantityChange = (item) => {
+        if(item.quentity > 1){
+            fetch(`http://localhost:6001/carts/${item._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify({quentity: item.quentity - 1})
+            }).then((res) => res.json()).then((data) => {
+                const updatedCart = cartItems.map((cartItem) => {
+                    if(cartItem._id === item._id){
+                        return{
+                            ...cartItem,
+                            quentity: cartItem.quentity - 1
+                        }
+                    }
+                    return cartItem;
+
+                })
+                refetch();
+                setCartItems(updatedCart);
+            })
+        }else{
+            alert("Quantity cannot be zero");
+        }
+    }
 
     //handle delete
     const handleDelete = (item)=>{
@@ -87,8 +149,14 @@ const CartPage = () => {
                     <td className='font-medium'>
                     {item.name}
                     </td>
-                    <td>{item.quantity}</td>
-                    <td>{item.price}</td>
+                    <td>
+                        <button className='btn btn-xs bg-gray-200 text-black shadow-2xl border-0' onClick={() => handleQuantityChange(item)}>-</button>
+                        <input type="number" value={item.quentity} className='w-10 mx-2 text-center overflow-hidden appearance-none ' onChange={() => console.log(item.quentity)}  />
+                        <button className='btn btn-xs bg-gray-200 text-black shadow-2xl border-0' onClick={() => handleQuantityUP(item)}>+</button>
+                    </td>
+                    <td>
+                        {calculatePrice(item).toFixed(2)}
+                    </td>
                     <th>
                     <button className="btn btn-ghost text-red-500 btn-xs" onClick={() => handleDelete(item)}>
                         <FaTrash/>
@@ -113,7 +181,7 @@ const CartPage = () => {
                 <div className='md:w-1/2 space-y-3'>
                     <h3 className='font-medium'>Shopping Details</h3>
                     <p>Total Items: {cart.length}</p>
-                    <p>Total Price: $0.00</p>
+                    <p>Total Price: ${subTotal.toFixed(2)}</p>
                     <button className='btn btn-primary bg-green-500'>Checkout</button>
                 </div>
             </div>
