@@ -1,3 +1,4 @@
+const Menu = require("../models/Menu");
 const getAllMenuItems = async (req, res) =>{
     try{
         const menu = await Menu.find({});
