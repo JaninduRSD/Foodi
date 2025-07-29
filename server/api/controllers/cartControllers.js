@@ -23,7 +23,7 @@ const addToCart = async(req, res) =>{
         const cartItem = await Carts.create({
             menuItemId, name, recipe, image, category, Price, quentity, email
         })
-        res.status(201).json(cartItem)
+        res.status(201).json({ insertedId: cartItem._id});
     }catch (error){
         res.status(500).json({ message: error.message });
     }
