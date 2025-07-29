@@ -23,6 +23,9 @@ mongoose.connect(
 const menuRoutes = require('./api/routes/menuRoutes');
 app.use('/menu', menuRoutes)
 
+const cartsRoutes = require('./api/routes/cartRoutes');
+app.use('/carts', cartsRoutes)
+
 app.get('/',(req, res) =>{
   res.send("Hello World");
 }
