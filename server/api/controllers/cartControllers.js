@@ -5,6 +5,7 @@ const getCartByEmail = async(req,res) =>{
         const email = req.query.email;
         const query = {email: email};
         const result = await Carts.find(query).exec();
+        res.json(result);
     }catch(error){
         res.status(500).json({message: error.message});
     }
