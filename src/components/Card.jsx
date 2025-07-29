@@ -25,13 +25,21 @@ export const Card = ({item}) => {
                 },
                 body: JSON.stringify(cartItem)
             }).then(res=>res.json()).then(data=>{
-                if(data.insertedId){
+                if(data._id || data.insertedId){
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
                         title: 'Item added to cart',
                         showConfirmButton: false,
                         timer: 1500
+                    })
+                } else if(data.message){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 2000
                     })
                 }
             });
