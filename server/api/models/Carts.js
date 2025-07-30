@@ -12,7 +12,7 @@ const cartSchema = new Schema({
     recipe:String,
     image: String,
     category : String,
-    Price: Number,
+    price: Number,
     quentity: Number,
     email:{
         type: String,
