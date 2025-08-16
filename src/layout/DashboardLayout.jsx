@@ -1,5 +1,8 @@
 import React from 'react'
+import { FaEdit, FaPlusCircle, FaShoppingBag, FaUser } from 'react-icons/fa'
+import { MdDashboard } from 'react-icons/md'
 import { Link } from 'react-router'
+import logo from '/logo.png'
 
 const DashboardLayout = () => {
   return (
@@ -15,8 +18,15 @@ const DashboardLayout = () => {
         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
         {/* Sidebar content here */}
-        <li><a>Dashboard</a></li>
-        <li><Link to='/dashboard/users'>All Users</Link></li>
+        <li><Link to='/dashboard'><img src={logo} alt=''/></Link></li>
+        <li><Link to='/dashboard'><MdDashboard/>Dashboard</Link></li>
+        <li><Link to='/dashboard/users'><FaShoppingBag/>Manage Booking</Link></li>
+        <li><Link to='/dashboard/users'><FaPlusCircle/>All Menu</Link></li>
+        <li><Link to='/dashboard/users'><FaEdit/>Menu Items</Link></li>
+        <li><Link to='/dashboard/users'><FaUser/>All Users</Link></li>
+
+
+
         </ul>
     </div>
     </div>
