@@ -20,9 +20,9 @@ const DashboardLayout = () => {
         {/* Sidebar content here */}
         <li><Link to='/dashboard'><img src={logo} alt='' className='w-20'/></Link></li>
         <li><Link to='/dashboard'><MdDashboard/>Dashboard</Link></li>
-        <li><Link to='/dashboard/users'><FaShoppingBag/>Manage Booking</Link></li>
-        <li><Link to='/dashboard/users'><FaPlusCircle/>All Menu</Link></li>
-        <li><Link to='/dashboard/users'><FaEdit/>Menu Items</Link></li>
+        <li><Link to='/dashboard/managebooking'><FaShoppingBag/>Manage Booking</Link></li>
+        <li><Link to='/dashboard/menu'><FaPlusCircle/>All Menu</Link></li>
+        <li><Link to='/dashboard/manageitems'><FaEdit/>Manage Items</Link></li>
         <li><Link to='/dashboard/users'><FaUser/>All Users</Link></li>
 
 
