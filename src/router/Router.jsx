@@ -6,6 +6,7 @@ import  SignUp  from "../components/SignUp";
 import UpdateProfile  from "../pages/dashboard/UpdateProfile";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
 import CartPage from "../pages/shop/CartPage";
+import DashboardLayout from "../layout/DashboardLayout";
 
 const router= createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router= createBrowserRouter([
     {
         path: "/signup",
         element: <SignUp />
+    },
+    {
+        path:"/dashboard",
+        element:<DashboardLayout/>
     }
 ]);
 export default router;
