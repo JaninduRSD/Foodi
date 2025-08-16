@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 const DashboardLayout = () => {
   return (
@@ -15,7 +16,7 @@ const DashboardLayout = () => {
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
         {/* Sidebar content here */}
         <li><a>Dashboard</a></li>
-        <li><a>All Users</a></li>
+        <li><Link to='/dashboard/users'>All Users</Link></li>
         </ul>
     </div>
     </div>
